@@ -1,0 +1,7 @@
+# Shell scripts must keep LF endings — CRLF breaks the shebang on any POSIX shell,
+# including Git Bash on Windows, which is where these hooks actually run.
+*.sh text eol=lf
+
+# Keep everything else consistent across machines.
+*.md text eol=lf
+*.json text eol=lf
