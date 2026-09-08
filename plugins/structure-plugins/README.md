@@ -1,4 +1,4 @@
-# hellodev-core
+# structure-plugins
 
 Stack-agnostic project governance for Claude Code.
 

@@ -6,7 +6,7 @@ A Claude Code marketplace of reusable, stack-agnostic development plugins.
 
 | Plugin | Purpose |
 | --- | --- |
-| [`hellodev-core`](plugins/hellodev-core) | Project governance — a four-document contract, ADR gating, verification, commit discipline, and design tokens |
+| [`structure-plugins`](plugins/structure-plugins) | Project governance — a four-document contract, ADR gating, verification, commit discipline, and design tokens |
 
 ## Install
 
@@ -17,14 +17,14 @@ from this marketplace on GitHub with no friction.
 
 ```
 /plugin marketplace add <your-github-username>/hellodev-plugins
-/plugin install hellodev-core@hellodev-plugins
+/plugin install structure-plugins@hellodev-plugins
 ```
 
 **From a local path** — for developing and testing before you push:
 
 ```
 /plugin marketplace add D:\Freelance\hellodev-plugins
-/plugin install hellodev-core@hellodev-plugins
+/plugin install structure-plugins@hellodev-plugins
 ```
 
 Enable `autoUpdate` for the marketplace in `~/.claude/settings.json` so every machine picks up
@@ -58,7 +58,7 @@ hellodev-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # marketplace manifest
 └── plugins/
-    └── hellodev-core/
+    └── structure-plugins/
         ├── .claude-plugin/
         │   └── plugin.json       # plugin manifest
         ├── commands/             # /hd-* slash commands
