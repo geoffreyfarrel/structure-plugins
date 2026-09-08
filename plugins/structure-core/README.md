@@ -25,10 +25,27 @@ a session.** Four artifacts carry it, and the plugin keeps them true.
 | `/st-design` | Convert pasted Figma CSS into project tokens, or update `DESIGN.md` |
 | `/st-clean` | Inventory one-off scripts and debug leftovers, clean with approval |
 
+### `/st-init` vs. `/st-status`
+
+Both concern the four artifacts, and they are the pair most often confused:
+
+- **`/st-init`** creates them. Once per repo. Detects the stack, interviews only for what the
+  code cannot answer, fills every placeholder, then verifies the command table it wrote.
+- **`/st-status`** reads them. Any time. Reports drift, staleness, unfilled placeholders, and
+  dangling log threads. Changes nothing.
+
+Missing artifacts → `/st-init`. Existing artifacts you no longer trust → `/st-status`.
+
 ## Skills
 
-Skills load on their own when the work calls for them; the commands are for when you want to
-drive explicitly.
+Skills are **knowledge, not actions**. You never type them — they load on their own when the
+work matches their description, and none of them has a slash command. The commands above are
+jobs that *consult* these rules.
+
+The pairing that causes the most confusion: `project-governance` is the standing contract
+saying every repo carries four artifacts and what keeps each true; `/st-init` is the command
+that actually creates them, and it reads the skill to know how. **There is no
+`/st-governance`.**
 
 - **`project-governance`** — the four-document contract. Detects the stack from lockfiles and
   configs rather than asking; interviews only for genuine preferences.
