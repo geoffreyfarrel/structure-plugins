@@ -61,7 +61,7 @@ listings — which makes them easy to confuse. They are not alternatives to each
 | You | type them | never type them |
 | Loading | on demand, when invoked | automatically, when the work matches the description |
 | Nature | an **action** — do this now | **knowledge** — the standing rules |
-| Count | 8 | 8 |
+| Count | 8 | 9 |
 | Example | `/st-init` | `project-governance` |
 
 A skill is the rulebook; a command is a job that consults it. `project-governance` is the
@@ -101,6 +101,7 @@ want to know whether they still tell the truth.
 | Skill | Engages when |
 | --- | --- |
 | `project-governance` | Starting work in a repo, or a governance document is missing |
+| `branch-workflow` | Before the first edit of a task — big tasks branch automatically, minor ones ask |
 | `adr-workflow` | A dependency, schema, architecture, or breaking change is proposed |
 | `session-log` | Recovering prior context, or finishing a unit of work |
 | `verification-gate` | Before committing, or when asked whether something is done |
@@ -115,6 +116,7 @@ want to know whether they still tell the truth.
 | --- | --- |
 | `SessionStart` | Prints which documents exist and the newest `LOG.md` entry |
 | `PreToolUse` (Bash) | Dependency add/remove stops for ADR confirmation; restores pass through |
+| `PreToolUse` (Write/Edit) | First edit on the default branch prompts for a branch. Once per session; silent on feature branches |
 | `Stop` | Blocks only on skipped verification, a missing ADR, or missing log context |
 
 ## Repository layout

@@ -29,6 +29,10 @@ Then check for gaps. Report missing artifacts once, in one line, and offer to cr
 
 Do not silently proceed without `CODINGSTYLE.md`. If it is absent and the user asks for implementation work, say so and offer `/st-init` first. If they decline, infer conventions from sibling files and note in your reply that conventions were inferred, not governed.
 
+Finally, before the first edit: if the task will change files and you are on the default
+branch, hand off to the `branch-workflow` skill. A branch decided after the work exists is a
+branch decided too late.
+
 ## Creating the artifacts
 
 The rule that decides whether to ask or to read:

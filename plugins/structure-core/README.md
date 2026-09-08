@@ -49,6 +49,9 @@ that actually creates them, and it reads the skill to know how. **There is no
 
 - **`project-governance`** — the four-document contract. Detects the stack from lockfiles and
   configs rather than asking; interviews only for genuine preferences.
+- **`branch-workflow`** — decides whether work needs its own branch, **before the first edit**.
+  Big tasks branch automatically and say so; minor single-file fixes ask once and honor the
+  answer without re-raising it at commit time.
 - **`adr-workflow`** — decides what needs an ADR, and stops *before* implementation to get it
   confirmed. Includes a detailed trigger/non-trigger table.
 - **`session-log`** — `LOG.md` as a handoff document, with compaction rules that keep it from
@@ -69,10 +72,12 @@ that actually creates them, and it reads the skill to know how. **There is no
 | --- | --- | --- |
 | `SessionStart` | command | Prints which artifacts exist and the newest `LOG.md` entry. Silent outside a git repo. |
 | `PreToolUse` (Bash) | command | Dependency add/remove commands stop for ADR confirmation. Restore commands (`npm install`, `pip install -r`) pass through. |
+| `PreToolUse` (Write/Edit) | command | The first edit made while on the default branch prompts for a branch decision. Fires once per session, and is silent on a feature branch, outside a git repo, or on a detached HEAD. |
 | `Stop` | prompt | Blocks only when verification was skipped, a dependency/schema/breaking change has no ADR, or durable context is missing from `LOG.md`. Approves by default. |
 
-The Stop hook is deliberately permissive. A false block costs a turn; a false approve costs
-almost nothing.
+Both prompting hooks are deliberately restrained — the branch guard fires at most once per
+session, and the Stop hook approves unless something concrete is missing. A false block costs
+a turn; a false approve costs almost nothing.
 
 ## Design notes
 

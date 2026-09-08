@@ -1,6 +1,6 @@
 ---
 name: commit-workflow
-description: Write Conventional Commit messages and open pull requests on GitHub or merge requests on GitLab. Use when committing, staging, pushing, branching, or when the user says commit, push, open a PR, create an MR, or /st-commit. Detects the host from the git remote so the right tooling and vocabulary are used.
+description: Write Conventional Commit messages and open pull requests on GitHub or merge requests on GitLab. Use when committing, staging, pushing, or when the user says commit, push, open a PR, create an MR, or /st-commit. Detects the host from the git remote so the right tooling and vocabulary are used. Deciding which branch the work belongs on is the branch-workflow skill's job, and it runs before the first edit rather than here.
 ---
 
 # Commit Workflow
@@ -49,13 +49,23 @@ When the working tree contains unrelated changes, stage only the paths for this 
 
 ## Branching
 
-If the current branch is the default branch (`main`/`master`) and the change is not trivial, create a branch first:
+Branch selection belongs to the `branch-workflow` skill, and it should have run **before the
+first edit** — not here. That skill holds the big-vs-minor classification and the naming rules.
 
-```
-<type>/<short-kebab-description>
-```
+By commit time only two cases remain:
 
-`feat/sales-funnel-pills`, `fix/n-plus-one-ranking`. Honor an existing convention in the repo's branch history over this default — check `git branch -a` before inventing a scheme.
+- **On a feature branch** — the normal case. Commit there.
+- **Still on the default branch** — the branch decision was missed. Do not quietly commit to
+  `main`. Say so and move the work:
+
+  > This is still on `main`. Moving it to `fix/n-plus-one-ranking` before committing — say the
+  > word if you want it on `main` instead.
+
+  `git switch -c <name>` carries the uncommitted work across; nothing is lost.
+
+The exception is a user who already chose to work in place. If `branch-workflow` asked and they
+said `main`, honor it and commit without re-raising. Asking twice is nagging, and nagging is
+how a rule gets switched off.
 
 ## Committing
 
