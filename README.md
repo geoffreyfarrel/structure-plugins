@@ -1,4 +1,4 @@
-# HelloDev Plugins
+# Structure Plugins
 
 A Claude Code marketplace of reusable, stack-agnostic development plugins.
 
@@ -6,7 +6,7 @@ A Claude Code marketplace of reusable, stack-agnostic development plugins.
 
 | Plugin | Purpose |
 | --- | --- |
-| [`structure-plugins`](plugins/structure-plugins) | Project governance — a four-document contract, ADR gating, verification, commit discipline, and design tokens |
+| [`structure-core`](plugins/structure-core) | Project governance — a four-document contract, ADR gating, verification, commit discipline, and design tokens |
 
 ## Install
 
@@ -16,15 +16,15 @@ from this marketplace on GitHub with no friction.
 **From GitHub**
 
 ```
-/plugin marketplace add <your-github-username>/hellodev-plugins
-/plugin install structure-plugins@hellodev-plugins
+/plugin marketplace add <your-github-username>/structure-plugins
+/plugin install structure-core@structure-plugins
 ```
 
 **From a local path** — for developing and testing before you push:
 
 ```
-/plugin marketplace add D:\Freelance\hellodev-plugins
-/plugin install structure-plugins@hellodev-plugins
+/plugin marketplace add D:\Freelance\structure-plugins
+/plugin install structure-core@structure-plugins
 ```
 
 Enable `autoUpdate` for the marketplace in `~/.claude/settings.json` so every machine picks up
@@ -33,8 +33,8 @@ changes without reinstalling:
 ```json
 {
   "extraKnownMarketplaces": {
-    "hellodev-plugins": {
-      "source": { "source": "github", "repo": "<your-username>/hellodev-plugins" },
+    "structure-plugins": {
+      "source": { "source": "github", "repo": "<your-username>/structure-plugins" },
       "autoUpdate": true
     }
   }
@@ -44,26 +44,26 @@ changes without reinstalling:
 ## Using it in a repository
 
 ```
-/hd-init      # once per repo — bootstraps the governance documents
-/hd-status    # any time — reports drift and staleness
+/st-init      # once per repo — bootstraps the governance documents
+/st-status    # any time — reports drift and staleness
 ```
 
-After `/hd-init`, the skills engage on their own. The commands are there for when you want to
+After `/st-init`, the skills engage on their own. The commands are there for when you want to
 drive explicitly.
 
 ## Repository layout
 
 ```
-hellodev-plugins/
+structure-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # marketplace manifest
 └── plugins/
-    └── structure-plugins/
+    └── structure-core/
         ├── .claude-plugin/
         │   └── plugin.json       # plugin manifest
-        ├── commands/             # /hd-* slash commands
+        ├── commands/             # /st-* slash commands
         ├── skills/               # auto-loading skills, each with SKILL.md
-        ├── templates/            # what /hd-init copies into a repo
+        ├── templates/            # what /st-init copies into a repo
         └── hooks/
             ├── hooks.json
             └── scripts/

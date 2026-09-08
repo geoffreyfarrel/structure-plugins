@@ -1,13 +1,13 @@
 {
-  "name": "hellodev-plugins",
+  "name": "structure-plugins",
   "owner": {
     "name": "Geoffrey Farrel",
     "email": "geoffreyfarrel67@gmail.com"
   },
   "plugins": [
     {
-      "name": "structure-plugins",
-      "source": "./plugins/structure-plugins",
+      "name": "structure-core",
+      "source": "./plugins/structure-core",
       "description": "Stack-agnostic project governance for Claude Code. Enforces a four-document contract (CODINGSTYLE.md, DESIGN.md, LOG.md, docs/adr/), gates risky changes behind Architecture Decision Records, detects the repository toolchain to run the right verification commands, and holds implementations to no-hardcoding and algorithmic-quality standards."
     }
   ]
