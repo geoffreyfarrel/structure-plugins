@@ -1,0 +1,14 @@
+{
+  "name": "hellodev-plugins",
+  "owner": {
+    "name": "Geoffrey Farrel",
+    "email": "geoffreyfarrel67@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "hellodev-core",
+      "source": "./plugins/hellodev-core",
+      "description": "Stack-agnostic project governance for Claude Code. Enforces a four-document contract (CODINGSTYLE.md, DESIGN.md, LOG.md, docs/adr/), gates risky changes behind Architecture Decision Records, detects the repository toolchain to run the right verification commands, and holds implementations to no-hardcoding and algorithmic-quality standards."
+    }
+  ]
+}
