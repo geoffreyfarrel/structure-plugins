@@ -16,12 +16,12 @@ a session.** Four artifacts carry it, and the plugin keeps them true.
 
 | Command | Does |
 | --- | --- |
-| `/st-init` | Bootstrap the four artifacts — detects the stack, interviews only for what code cannot answer |
+| `/st-init` | Create `CLAUDE.md` from a requirements interview, then bootstrap the four artifacts — detects the stack, interviews only for what code cannot answer |
 | `/st-status` | Read-only governance health report: drift, staleness, unfilled placeholders |
 | `/st-adr` | Draft an ADR, confirm it with the user, then implement |
 | `/st-log` | Append this session's durable outcome to `LOG.md`, compact when due |
 | `/st-check` | Run the repo's real format, lint, typecheck, and test commands |
-| `/st-commit` | Verify, scan for clutter, then commit with a Conventional Commit message |
+| `/st-commit` | Verify, scan for clutter, then make atomic commits with Conventional Commit messages |
 | `/st-design` | Convert pasted Figma CSS into project tokens, or update `DESIGN.md` |
 | `/st-clean` | Inventory one-off scripts and debug leftovers, clean with approval |
 
@@ -29,7 +29,8 @@ a session.** Four artifacts carry it, and the plugin keeps them true.
 
 Both concern the four artifacts, and they are the pair most often confused:
 
-- **`/st-init`** creates them. Once per repo. Detects the stack, interviews only for what the
+- **`/st-init`** creates them. Once per repo. Starts with `CLAUDE.md` — asks for the project's
+  requirements and confirms repo details — then detects the stack, interviews only for what the
   code cannot answer, fills every placeholder, then verifies the command table it wrote.
 - **`/st-status`** reads them. Any time. Reports drift, staleness, unfilled placeholders, and
   dangling log threads. Changes nothing.
@@ -47,8 +48,10 @@ saying every repo carries four artifacts and what keeps each true; `/st-init` is
 that actually creates them, and it reads the skill to know how. **There is no
 `/st-governance`.**
 
-- **`project-governance`** — the four-document contract. Detects the stack from lockfiles and
-  configs rather than asking; interviews only for genuine preferences.
+- **`project-governance`** — the four-document contract, with `CLAUDE.md` created first from a
+  requirements interview. Detects the stack from lockfiles and configs rather than asking;
+  interviews only for genuine preferences. Records every pattern that must stay consistent —
+  appearance in `DESIGN.md`, code in `CODINGSTYLE.md` — the second time it is used.
 - **`branch-workflow`** — decides whether work needs its own branch, **before the first edit**.
   Big tasks branch automatically and say so; minor single-file fixes ask once and honor the
   answer without re-raising it at commit time.
@@ -58,12 +61,13 @@ that actually creates them, and it reads the skill to know how. **There is no
   becoming a wall nobody reads.
 - **`verification-gate`** — derives the real command vocabulary (CI first, then manifest
   scripts, then the monorepo orchestrator) and refuses to call unverified work done.
-- **`commit-workflow`** — Conventional Commits, plus GitHub PR / GitLab MR detection from the
+- **`commit-workflow`** — atomic commits (one logical change each) with Conventional Commit
+  messages, plus GitHub PR / GitLab MR detection from the
   git remote.
 - **`design-tokens`** — `DESIGN.md` upkeep and Figma→Tailwind conversion, with a strict
   preference order that keeps hardcoded values out.
 - **`engineering-standards`** — no hardcoded values, structure that absorbs the next case,
-  correct algorithm over brute force. Applied to every implementation without being asked.
+  correct algorithm over brute force, no decorative emojis. Applied to every implementation without being asked.
 - **`repo-hygiene`** — scratch scripts go to the scratchpad, not the repo root.
 
 ## Hooks
