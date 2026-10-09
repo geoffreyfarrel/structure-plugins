@@ -1,13 +1,38 @@
 ---
 name: commit-workflow
-description: Write Conventional Commit messages and open pull requests on GitHub or merge requests on GitLab. Use when committing, staging, pushing, or when the user says commit, push, open a PR, create an MR, or /st-commit. Detects the host from the git remote so the right tooling and vocabulary are used. Deciding which branch the work belongs on is the branch-workflow skill's job, and it runs before the first edit rather than here.
+description: Make atomic commits with Conventional Commit messages, and open pull requests on GitHub or merge requests on GitLab. Use when committing, staging, pushing, or when the user says commit, push, open a PR, create an MR, or /st-commit. Detects the host from the git remote so the right tooling and vocabulary are used. Deciding which branch the work belongs on is the branch-workflow skill's job, and it runs before the first edit rather than here.
 ---
 
 # Commit Workflow
 
+Two rules hold for every commit, without being asked: **it is atomic**, and **its message is a
+Conventional Commit**.
+
+## Atomic commits
+
+One commit is one logical change — the smallest unit that makes sense on its own, could be
+reverted on its own, and leaves the project building and passing.
+
+- **Split by intent, not by file.** A bug fix, the refactor that enabled it, and an unrelated
+  formatting pass are three commits, even when they touch the same file.
+- **Never mix types.** A diff that needs both `feat` and `fix` to describe it is two commits.
+  If the subject line wants an "and", split it.
+- **Keep each commit green.** Order the commits so every one of them passes verification.
+  Do not commit a half-change that a later commit repairs.
+- **Do not over-split either.** A feature and the test that proves it belong together; so do a
+  rename and every call site it touches.
+
+When the working tree holds several logical changes, propose the split before committing:
+
+> Three commits: `refactor(ranking): extract period resolver`, `fix(ranking): exclude
+> archived targets`, `test(ranking): cover archived targets`. Go ahead?
+
+Stage each group by path. When one file holds hunks for two commits, stage a partial patch
+(`git diff <file>` into a patch, trim it, `git apply --cached`) rather than bundling them.
+
 ## Message format
 
-Conventional Commits:
+Conventional Commits, always:
 
 ```
 <type>(<scope>): <subject>
@@ -45,7 +70,7 @@ A subject line must let someone scanning `git log` decide whether this commit is
 
 Stage deliberately. `git add -A` is acceptable only when you have read the full status and every change belongs in this commit.
 
-When the working tree contains unrelated changes, stage only the paths for this commit and say what you left out. Never bundle unrelated work to save a round trip.
+When the working tree contains unrelated changes, stage only the paths for this commit and say what you left out. Never bundle unrelated work to save a round trip — see [Atomic commits](#atomic-commits).
 
 ## Branching
 
