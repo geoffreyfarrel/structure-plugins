@@ -1,6 +1,6 @@
 ---
 name: project-governance
-description: Enforce the Structure four-document contract in a repository — CODINGSTYLE.md, DESIGN.md, LOG.md, and docs/adr/ — and keep recurring design and code patterns recorded in those documents. Use at the start of work in any repo, when any of those files is missing, or when the user says init project docs, set up conventions, bootstrap governance, project standards, or /st-init. Detects the tech stack from the existing code instead of asking when the repo already has code, and interviews the user when it does not.
+description: Enforce the Structure four-document contract in a repository — CODINGSTYLE.md, DESIGN.md, LOG.md, and docs/adr/ — with CLAUDE.md created first from a requirements interview, and keep recurring design and code patterns recorded in those documents. Use at the start of work in any repo, when CLAUDE.md or any of those files is missing, or when the user says init project docs, set up conventions, bootstrap governance, project standards, or /st-init. Detects the tech stack from the existing code instead of asking when the repo already has code, and interviews the user when it does not.
 ---
 
 # Project Governance
@@ -110,7 +110,11 @@ In a monorepo, `CODINGSTYLE.md`, `LOG.md`, and `docs/adr/` live at the workspace
 
 ## Relationship to CLAUDE.md
 
-`CLAUDE.md` is Claude Code's entry point; the four artifacts are the substance. Do not duplicate content between them. `CLAUDE.md` should point:
+`CLAUDE.md` is Claude Code's entry point, and it is **always created first**. Before any of the four artifacts exist, `/st-init` writes `CLAUDE.md` from a requirements interview: what the project is, who it is for, what it must do, what is out of scope, its constraints, and the repo details (host, default branch, branch naming, deploy target). The questions are in `references/bootstrap-interview.md`. Template: `${CLAUDE_PLUGIN_ROOT}/templates/CLAUDE.md`.
+
+The requirements interview is never skipped for being an existing repo — code says how a project is built, not what it is for. Only the repo details are detected rather than asked.
+
+`CLAUDE.md` holds the *what* and *why* of the project; the four artifacts hold the *how*. Do not duplicate content between them. Once the artifacts exist, `CLAUDE.md` should point:
 
 ```markdown
 ## Project standards

@@ -1,6 +1,35 @@
 # Bootstrap Interview
 
-Questions to ask when creating `CODINGSTYLE.md` and `DESIGN.md`. Ask only what the repository cannot tell you.
+Questions to ask when creating `CLAUDE.md`, `CODINGSTYLE.md`, and `DESIGN.md`. Ask only what the repository cannot tell you.
+
+## CLAUDE.md — always first, any repo
+
+`/st-init` opens with this round, before any other document is surveyed or written. It is
+mandatory in greenfield and existing repos alike: code shows how a project is built, never
+what it is for.
+
+**Requirements — ask in one plain message, free-form.** These have no sensible options to
+offer, so do not force them into `AskUserQuestion`:
+
+1. **What is this project, and who uses it?**
+2. **What must it do?** The main requirements or features, in priority order.
+3. **What is out of scope?** Writing it down stops it being built by accident.
+4. **What constraints apply?** Deadlines, compliance, performance targets, device or browser
+   support, hosting limits.
+
+If an answer is thin, write what you have and mark the gap `<!-- TODO -->` rather than
+pressing for more — it will sharpen as real work raises it.
+
+**Repo details — detect, then confirm.** Read the git remote, the default branch, the last ten
+branch names, and any deploy config first. Then confirm in one `AskUserQuestion` call, with the
+detected values as options:
+
+1. **Host and default branch** — e.g. "GitHub, `main`" vs the alternatives.
+2. **Branch naming** — the detected convention, or `<type>/<short-kebab-description>`.
+3. **Deploy target** — the detected platform, "none yet", or other.
+4. **Environments** — local only, local + production, or local + staging + production.
+
+In a fresh repo with no remote and no history, these become plain questions.
 
 ## Rules for asking
 
@@ -52,5 +81,5 @@ If the repo has UI code but no `DESIGN.md`, extract the de facto tokens from the
 Do not run the interview when:
 
 - The repo has no UI at all — skip `DESIGN.md` entirely and note in `CODINGSTYLE.md` that it is intentionally absent.
-- The user is mid-task and just wants the immediate thing done. Offer `/st-init` and move on; do not block their request on a questionnaire.
+- The user is mid-task and just wants the immediate thing done. Offer `/st-init` and move on; do not block their request on a questionnaire. (Inside `/st-init` itself, the CLAUDE.md round is never skipped.)
 - A parent workspace already defines the standard and this is a child package. Point to the parent instead of forking a second contract.
