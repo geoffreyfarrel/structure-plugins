@@ -1,6 +1,6 @@
 ---
 name: project-governance
-description: Enforce the Structure four-document contract in a repository — CODINGSTYLE.md, DESIGN.md, LOG.md, and docs/adr/. Use at the start of work in any repo, when any of those files is missing, or when the user says init project docs, set up conventions, bootstrap governance, project standards, or /st-init. Detects the tech stack from the existing code instead of asking when the repo already has code, and interviews the user when it does not.
+description: Enforce the Structure four-document contract in a repository — CODINGSTYLE.md, DESIGN.md, LOG.md, and docs/adr/ — with CLAUDE.md created first from a requirements interview, and keep recurring design and code patterns recorded in those documents. Use at the start of work in any repo, when CLAUDE.md or any of those files is missing, or when the user says init project docs, set up conventions, bootstrap governance, project standards, or /st-init. Detects the tech stack from the existing code instead of asking when the repo already has code, and interviews the user when it does not.
 ---
 
 # Project Governance
@@ -57,6 +57,33 @@ For `DESIGN.md` specifically: if the user has a Figma file, ask them to paste th
 
 An artifact that has drifted from the code is a liability — it will confidently mislead the next session.
 
+### Consistency lives in the documents
+
+Anything that must look or work the same way every time is written down in its document, not
+carried in a session's memory. Each kind of rule has one home:
+
+| Kind of consistency | Home | Examples |
+|---|---|---|
+| How things look | `DESIGN.md` | Tokens, component conventions (button sizes, card anatomy, empty and loading states), layout patterns, icon usage |
+| How code is written | `CODINGSTYLE.md` | Naming, file layout, error handling, data-fetching pattern, API response shape, test structure |
+| Why a pattern was chosen | `docs/adr/` | A pattern that replaced an alternative, or that is costly to reverse |
+
+- **Before building**, look up the relevant rule and follow it. A second card that differs
+  from the first, or a second endpoint shaped differently from the first, is a defect even if
+  each looks fine on its own.
+- **When a pattern repeats** — the second time a component appearance or a code shape is used
+  — record it in its home in the same change. The third use then follows a written rule, not a
+  guess at the first two.
+- **When you establish something new** that later work should match, add it in the same change
+  and say so in one line. Do not wait for it to repeat if you already know it is the standard.
+- **When the code and the document disagree**, the document wins for new code. Report the
+  disagreement; fix it only inside the code you are already touching.
+
+Keep entries short and concrete — one rule per row, with the token or file it applies to. A
+document full of prose nobody reads keeps nothing consistent.
+
+### Change triggers
+
 - **After adding a dependency**, update the stack table in `CODINGSTYLE.md`. The ADR records *why*; `CODINGSTYLE.md` records *that it is now part of the stack*.
 - **After changing a token** (a color, a spacing scale, a font), update `DESIGN.md` in the same change. A hardcoded hex that contradicts `DESIGN.md` is a bug.
 - **After finishing a task**, append to `LOG.md` — see the `session-log` skill.
@@ -83,7 +110,11 @@ In a monorepo, `CODINGSTYLE.md`, `LOG.md`, and `docs/adr/` live at the workspace
 
 ## Relationship to CLAUDE.md
 
-`CLAUDE.md` is Claude Code's entry point; the four artifacts are the substance. Do not duplicate content between them. `CLAUDE.md` should point:
+`CLAUDE.md` is Claude Code's entry point, and it is **always created first**. Before any of the four artifacts exist, `/st-init` writes `CLAUDE.md` from a requirements interview: what the project is, who it is for, what it must do, what is out of scope, its constraints, and the repo details (host, default branch, branch naming, deploy target). The questions are in `references/bootstrap-interview.md`. Template: `${CLAUDE_PLUGIN_ROOT}/templates/CLAUDE.md`.
+
+The requirements interview is never skipped for being an existing repo — code says how a project is built, not what it is for. Only the repo details are detected rather than asked.
+
+`CLAUDE.md` holds the *what* and *why* of the project; the four artifacts hold the *how*. Do not duplicate content between them. Once the artifacts exist, `CLAUDE.md` should point:
 
 ```markdown
 ## Project standards

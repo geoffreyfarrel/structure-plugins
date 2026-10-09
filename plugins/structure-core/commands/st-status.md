@@ -8,7 +8,8 @@ Report the governance health of this repository. Read-only — change nothing.
 Check and report, compactly:
 
 1. **Artifacts present**
-   `CODINGSTYLE.md`, `DESIGN.md`, `LOG.md`, `docs/adr/` — present or missing.
+   `CLAUDE.md`, `CODINGSTYLE.md`, `DESIGN.md`, `LOG.md`, `docs/adr/` — present or missing.
+   For `CLAUDE.md`, also flag a missing Requirements or Repository section.
    For each present file, flag any remaining `<!-- TODO -->` placeholders, since those read as
    decisions that were never made.
 

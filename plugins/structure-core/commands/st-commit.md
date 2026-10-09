@@ -1,5 +1,5 @@
 ---
-description: Verify, then commit with a Conventional Commit message
+description: Verify, then make atomic commits with Conventional Commit messages
 argument-hint: [--push] [--pr] [message hint]
 ---
 
@@ -22,8 +22,11 @@ pushing), and/or a free-text hint about what the change is.
    `debugger`), commented-out blocks, `.env` files, anything with a credential shape, editor
    artifacts. Raise what you find — do not silently include it and do not silently delete it.
 
-4. **Stage deliberately.** Only the paths belonging to this commit. If unrelated changes are
-   present, leave them and say what you left out. Never bundle unrelated work.
+4. **Split into atomic commits.** If the diff holds more than one logical change, propose the
+   split — one Conventional Commit subject per group — and commit each group separately, in an
+   order where every commit passes verification. Stage only the paths (or hunks) belonging to
+   the current commit. If unrelated changes are present, leave them and say what you left out.
+   Never bundle unrelated work.
 
 5. **Branch if needed.** If on the default branch and the change is non-trivial, create
    `<type>/<short-kebab-description>` — honoring any existing convention visible in

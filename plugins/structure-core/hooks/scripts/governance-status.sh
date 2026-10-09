@@ -22,6 +22,7 @@ note() {
   fi
 }
 
+note "CLAUDE.md"
 note "CODINGSTYLE.md"
 note "LOG.md"
 

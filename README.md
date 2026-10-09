@@ -72,7 +72,8 @@ it loads on its own whenever governance is relevant, including when a document i
 
 So there is no `/st-governance` to run. The nearest commands to it are:
 
-- **`/st-init`** — writes the documents. Run once per repo. Detects the stack, interviews you
+- **`/st-init`** — writes the documents. Run once per repo. Starts with `CLAUDE.md` by asking
+  for the project's requirements and repo details, then detects the stack, interviews you
   only for what the code cannot answer, fills every template placeholder, and verifies the
   command table it recorded actually runs.
 - **`/st-status`** — read-only health report on documents that already exist. Run any time.
@@ -87,12 +88,12 @@ want to know whether they still tell the truth.
 
 | Command | Does |
 | --- | --- |
-| `/st-init` | Bootstrap the four documents in a repo |
+| `/st-init` | Create `CLAUDE.md` from a requirements interview, then bootstrap the four documents |
 | `/st-status` | Read-only governance health report |
 | `/st-adr` | Draft an ADR, confirm it, then implement |
 | `/st-log` | Append this session's outcome to `LOG.md`, compact when due |
 | `/st-check` | Run the repo's real format, lint, typecheck, and test commands |
-| `/st-commit` | Verify, scan for clutter, commit with a Conventional Commit message |
+| `/st-commit` | Verify, scan for clutter, make atomic commits with Conventional Commit messages |
 | `/st-design` | Convert pasted Figma CSS into project tokens |
 | `/st-clean` | Inventory one-off scripts and debug leftovers, clean with approval |
 
@@ -100,14 +101,14 @@ want to know whether they still tell the truth.
 
 | Skill | Engages when |
 | --- | --- |
-| `project-governance` | Starting work in a repo, or a governance document is missing |
+| `project-governance` | Starting work in a repo, a governance document is missing, or a design or code pattern repeats and needs recording |
 | `branch-workflow` | Before the first edit of a task — big tasks branch automatically, minor ones ask |
 | `adr-workflow` | A dependency, schema, architecture, or breaking change is proposed |
 | `session-log` | Recovering prior context, or finishing a unit of work |
 | `verification-gate` | Before committing, or when asked whether something is done |
-| `commit-workflow` | Committing, branching, or opening a PR/MR |
+| `commit-workflow` | Committing (atomic, Conventional Commits) or opening a PR/MR |
 | `design-tokens` | Figma CSS is pasted, or a style value is being changed |
-| `engineering-standards` | Any implementation — no hardcoding, scalable structure, no brute force |
+| `engineering-standards` | Any implementation — no hardcoding, scalable structure, no brute force, no decorative emojis |
 | `repo-hygiene` | A throwaway script is being written, or before a commit |
 
 **Hooks** — invisible, always on.

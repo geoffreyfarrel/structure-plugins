@@ -70,6 +70,11 @@ The same preference order applies with different targets:
 
 ## Keeping DESIGN.md true
 
-Update it in the same change whenever a token is added, changed, or retired. When you notice a hardcoded value in code that contradicts `DESIGN.md`, report it; fix it if it is in the code you are already touching, otherwise note it in `LOG.md`.
+Update it in the same change whenever a token is added, changed, or retired.
+
+Tokens are not the whole contract. When a component appearance repeats — the second card,
+modal, table, or form built the same way — record its convention under **Component
+conventions** in the same change, so the next one matches it instead of approximating it.
+Before building a UI element, check that section first and follow what it says. When you notice a hardcoded value in code that contradicts `DESIGN.md`, report it; fix it if it is in the code you are already touching, otherwise note it in `LOG.md`.
 
 Dark mode: if the project supports it, every color token needs its pair, and a new token without a dark counterpart is incomplete work.

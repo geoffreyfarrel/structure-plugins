@@ -1,6 +1,6 @@
 ---
 name: engineering-standards
-description: Non-negotiable implementation rules for Structure projects — no hardcoded values, scalable structure, and a correct algorithm rather than brute force. Apply when writing or reviewing any implementation, when a literal appears inline, when a conditional chain is growing, when a loop nests inside another loop over the same data, or when a solution works but would not survive ten times the data.
+description: Non-negotiable implementation rules for Structure projects — no hardcoded values, scalable structure, a correct algorithm rather than brute force, and no decorative emojis. Apply when writing or reviewing any implementation, comment, log message, or script output, when a literal appears inline, when a conditional chain is growing, when a loop nests inside another loop over the same data, or when a solution works but would not survive ten times the data.
 ---
 
 # Engineering Standards
@@ -55,7 +55,27 @@ Before writing a loop over data that could grow, state the complexity to yoursel
 
 **Do not micro-optimize.** Complexity class matters; shaving constant factors in code that runs once does not, and it costs readability.
 
-## 4. When these rules conflict with the codebase
+## 4. No unnecessary emojis
+
+Emojis do not belong in anything you write into the repository unless the product calls for
+them.
+
+**Never add emojis to:**
+
+- Source code — identifiers, comments, docblocks, log and console output, error messages.
+- Scripts and CLI output — `✅ Done!` is `Done.`
+- Commit messages, branch names, PR/MR titles and bodies.
+- Governance documents and READMEs — headings and bullets carry structure without decoration.
+
+**Legitimate emojis:** user-facing content where the design specifies them (record it in
+`DESIGN.md` so it is a decision, not a habit), data the feature genuinely processes, and test
+fixtures that exercise Unicode handling.
+
+The test is **"would removing it lose information?"** If not, it is decoration. When the
+surrounding code already uses emojis decoratively, follow section 5: keep your own addition
+clean and mention the pattern rather than spreading it.
+
+## 5. When these rules conflict with the codebase
 
 If the surrounding code violates these standards, do not silently replicate the violation and do not unilaterally refactor the file.
 
@@ -65,6 +85,6 @@ Match the local structure for consistency, keep your own addition clean, and sur
 
 If the violation is a genuine defect in the path you are touching — an N+1 in the query you are modifying — fix it as part of the change and say that you did. If it is broad, propose it as separate work rather than expanding the current change.
 
-## 5. What "done" means
+## 6. What "done" means
 
-Before reporting work complete: the verification gate passed, no new hardcoded values were introduced, no new N+1 or nested scan was introduced, and any deliberate deviation from these standards was stated out loud rather than left for the reader to find.
+Before reporting work complete: the verification gate passed, no new hardcoded values were introduced, no new N+1 or nested scan was introduced, no decorative emojis were added, and any deliberate deviation from these standards was stated out loud rather than left for the reader to find.
