@@ -86,6 +86,9 @@ Scale: <!-- TODO: e.g. 4px steps, utilities are px ÷ 4 -->
 
 ## Component conventions
 
+Every appearance that must stay consistent is recorded here. Add a row the second time a
+pattern is used, so the third use follows it.
+
 <!-- TODO: rules that apply across components — button sizing, input heights,
      focus ring treatment, disabled state, loading state, empty state, icon sizing. -->
 
