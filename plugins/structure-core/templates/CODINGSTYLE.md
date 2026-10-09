@@ -81,6 +81,7 @@ These apply regardless of what surrounding code does:
 - No hardcoded values — colors, spacing, URLs, magic numbers, and status strings are tokens, config, or enums.
 - Structure absorbs the next case without a rewrite. A conditional chain past four branches becomes a map.
 - Correct algorithm over brute force. No N+1 queries, no nested scans over the same collection.
+- No decorative emojis in code, comments, logs, commit messages, or docs. User-facing emojis only where `DESIGN.md` specifies them.
 - Verification passes before work is reported as done.
 - Risky or architectural changes get an ADR and user confirmation first.
 
