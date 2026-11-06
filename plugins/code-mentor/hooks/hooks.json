@@ -1,0 +1,28 @@
+{
+  "description": "code-mentor hooks: when mentor mode is on, remind Claude on session start and on every prompt to guide rather than write the user's code. Silent when mentor mode is off.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/mentor-context.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/mentor-context.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
