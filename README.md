@@ -14,19 +14,31 @@ A Claude Code marketplace of reusable, stack-agnostic development plugins.
 The marketplace repo is independent of where your projects live. A project on GitLab installs
 from this marketplace on GitHub with no friction.
 
-**From GitHub**
+**1. Add the marketplace** — once per machine.
+
+From GitHub:
 
 ```
 /plugin marketplace add geoffreyfarrel/structure-plugins
-/plugin install structure-core@structure-plugins
-/plugin install code-mentor@structure-plugins
 ```
 
-**From a local path** — for developing and testing before you push:
+Or from a local path, for developing and testing before you push:
 
 ```
 /plugin marketplace add D:\Freelance\structure-plugins
+```
+
+**2. Install the plugins you want** — each one is independent.
+
+`structure-core` — project governance:
+
+```
 /plugin install structure-core@structure-plugins
+```
+
+`code-mentor` — Claude as a coding guide:
+
+```
 /plugin install code-mentor@structure-plugins
 ```
 

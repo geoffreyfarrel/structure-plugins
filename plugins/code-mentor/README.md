@@ -6,8 +6,15 @@ and reviews what you wrote before moving on.
 
 ## Install
 
+Add the marketplace (once per machine):
+
 ```
 /plugin marketplace add geoffreyfarrel/structure-plugins
+```
+
+Then install the plugin:
+
+```
 /plugin install code-mentor@structure-plugins
 ```
 
