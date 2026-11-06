@@ -7,6 +7,7 @@ A Claude Code marketplace of reusable, stack-agnostic development plugins.
 | Plugin | Purpose |
 | --- | --- |
 | [`structure-core`](plugins/structure-core) | Project governance — a four-document contract, ADR gating, verification, commit discipline, and design tokens |
+| [`code-mentor`](plugins/code-mentor) | Claude as a coding guide — you write the code; Claude plans steps, explains, hints, and reviews (`/mentor-on`, `/mentor-off`) |
 
 ## Install
 
@@ -18,6 +19,7 @@ from this marketplace on GitHub with no friction.
 ```
 /plugin marketplace add geoffreyfarrel/structure-plugins
 /plugin install structure-core@structure-plugins
+/plugin install code-mentor@structure-plugins
 ```
 
 **From a local path** — for developing and testing before you push:
@@ -25,6 +27,7 @@ from this marketplace on GitHub with no friction.
 ```
 /plugin marketplace add D:\Freelance\structure-plugins
 /plugin install structure-core@structure-plugins
+/plugin install code-mentor@structure-plugins
 ```
 
 Enable `autoUpdate` for the marketplace in `~/.claude/settings.json` so every machine picks up
@@ -41,7 +44,7 @@ changes without reinstalling:
 }
 ```
 
-## Using it in a repository
+## Using structure-core
 
 ```
 /st-init      # once per repo — bootstraps the governance documents
@@ -51,7 +54,7 @@ changes without reinstalling:
 After `/st-init`, the skills engage on their own. The commands are there for when you want to
 drive explicitly.
 
-## Commands vs. skills
+## structure-core: commands vs. skills
 
 The plugin ships two kinds of component, and they show up side by side in Claude Code's
 listings — which makes them easy to confuse. They are not alternatives to each other.
@@ -82,7 +85,7 @@ So there is no `/st-governance` to run. The nearest commands to it are:
 Rough rule: `/st-init` when the documents are missing, `/st-status` when they exist and you
 want to know whether they still tell the truth.
 
-## Components
+## structure-core components
 
 **Commands** — explicit, typed.
 
@@ -120,6 +123,23 @@ want to know whether they still tell the truth.
 | `PreToolUse` (Write/Edit) | First edit on the default branch prompts for a branch. Once per session; silent on feature branches |
 | `Stop` | Blocks only on skipped verification, a missing ADR, or missing log context |
 
+## Using code-mentor
+
+`code-mentor` makes Claude a guide instead of an implementer: you write the code, Claude
+plans the steps, explains the concepts, gives hints, and reviews your work.
+
+```
+/mentor-on build a login form   # plan the task and start step 1
+/mentor-hint                    # stuck — next hint, escalating from a question to pseudocode
+/mentor-review                  # step done — review it and move on
+/mentor-explain closures        # explain a concept, API, or error
+/mentor-off                     # back to normal Claude; the plan is kept for later
+```
+
+Progress lives in `.claude/code-mentor.local.md` — add `.claude/*.local.md` to `.gitignore`.
+The no-code rule is a reminder, not a block: ask Claude to write it anyway and it will, then
+explain it line by line. See the [plugin README](plugins/code-mentor) for details.
+
 ## Repository layout
 
 ```
@@ -127,15 +147,22 @@ structure-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # marketplace manifest
 └── plugins/
-    └── structure-core/
+    ├── structure-core/
+    │   ├── .claude-plugin/
+    │   │   └── plugin.json       # plugin manifest
+    │   ├── commands/             # /st-* slash commands
+    │   ├── skills/               # auto-loading skills, each with SKILL.md
+    │   ├── templates/            # what /st-init copies into a repo
+    │   └── hooks/
+    │       ├── hooks.json
+    │       └── scripts/
+    └── code-mentor/
         ├── .claude-plugin/
-        │   └── plugin.json       # plugin manifest
-        ├── commands/             # /st-* slash commands
-        ├── skills/               # auto-loading skills, each with SKILL.md
-        ├── templates/            # what /st-init copies into a repo
-        └── hooks/
-            ├── hooks.json
-            └── scripts/
+        │   └── plugin.json
+        ├── commands/             # /mentor-* slash commands
+        ├── skills/guided-coding/ # the mentoring rules and hint ladder
+        ├── templates/session.md  # shape of the per-repo session file
+        └── hooks/                # mentor-mode reminder on session start and each prompt
 ```
 
 ## Adding a plugin

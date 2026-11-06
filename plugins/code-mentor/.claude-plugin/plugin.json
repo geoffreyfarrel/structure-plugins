@@ -1,0 +1,19 @@
+{
+  "name": "code-mentor",
+  "version": "0.1.0",
+  "description": "Turns Claude into a coding guide. While mentor mode is on, Claude does not write project code: it breaks the user's goal into small steps, explains the concepts behind each one, gives hints that escalate from a question to pseudocode, and reviews the code the user writes before moving on.",
+  "license": "MIT",
+  "keywords": [
+    "mentor",
+    "learning",
+    "teaching",
+    "guided-coding",
+    "pair-programming",
+    "code-review",
+    "socratic"
+  ],
+  "author": {
+    "name": "Geoffrey Farrel",
+    "email": "geoffreyfarrel67@gmail.com"
+  }
+}
