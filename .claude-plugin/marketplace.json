@@ -9,6 +9,11 @@
       "name": "structure-core",
       "source": "./plugins/structure-core",
       "description": "Stack-agnostic project governance for Claude Code. Enforces a four-document contract (CODINGSTYLE.md, DESIGN.md, LOG.md, docs/adr/), gates risky changes behind Architecture Decision Records, detects the repository toolchain to run the right verification commands, and holds implementations to no-hardcoding and algorithmic-quality standards."
+    },
+    {
+      "name": "code-mentor",
+      "source": "./plugins/code-mentor",
+      "description": "Turns Claude into a coding guide. While mentor mode is on, Claude plans the user's goal in small steps, explains concepts, gives escalating hints, and reviews the code the user writes, instead of writing it."
     }
   ]
 }
